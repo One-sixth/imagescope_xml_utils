@@ -200,7 +200,8 @@ class ImageScopeXmlWriter:
             assert isinstance(con, np.ndarray)
             assert con.ndim == 2 and con.shape[1] == 2
             if clos and np.any(con[0] != con[-1]):
-                con = con.resize([con.shape[0]+1, con.shape[1]])
+                con = np.resize(con, [con.shape[0]+1, con.shape[1]])
+                con[-1] = con[0]
             self.contour_color_regs[color].append(con)
 
     def add_boxes(self, boxes, colors):
